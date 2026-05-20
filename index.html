@@ -1,0 +1,107 @@
+<!-- ꕤ AGL -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0a0f0a" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Aglair | Portfólio</title>
+  <meta name="description" content="Portfólio de Aglair. Projetos, blog e contato." />
+  <meta name="author" content="Aglair" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aglair.pages.dev" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="Aglair | Portfólio" />
+  <meta property="og:title"       content="Aglair | Portfólio" />
+  <meta property="og:description" content="Portfólio de Aglair. Projetos, blog e contato." />
+  <meta property="og:url"         content="https://aglair.pages.dev" />
+  <meta property="og:image"       content="https://aglair.pages.dev/og-image.png" />
+  <meta property="og:image:alt"    content="Portfólio de Aglair. Projetos, blog e contato." />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale"      content="pt_BR" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Aglair | Portfólio" />
+  <meta name="twitter:description" content="Portfólio de Aglair. Projetos, blog e contato." />
+  <meta name="twitter:image"       content="https://aglair.pages.dev/og-image.png" />
+  <meta name="twitter:image:alt"   content="Portfólio de Aglair. Projetos, blog e contato." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Aglair" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.4/dist/terminal.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://aglair.pages.dev/#person",
+        "name": "Aglair",
+        "url": "https://aglair.pages.dev",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://aglair.pages.dev/og-image.png",
+          "width": 1200,
+          "height": 630
+        },
+        "jobTitle": "Desenvolvedora",
+        "knowsAbout": ["JavaScript", "Linux", "Node.js", "Docker", "Bash", "Git"],
+        "sameAs": [
+          "https://github.com/aglairdev",
+          "https://linkedin.com/in/aglair"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://aglair.pages.dev/#website",
+        "name": "Aglair — Portfólio",
+        "url": "https://aglair.pages.dev",
+        "author": { "@id": "https://aglair.pages.dev/#person" },
+        "inLanguage": "pt-BR"
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="terminal">
+  <div class="scanlines" aria-hidden="true"></div>
+  <nav class="site-nav" role="navigation" aria-label="Menu principal">
+    <div class="nav-logo">
+      <span class="c-user">visitor</span><span class="c-sep">@</span><span class="c-host">portfólio</span><span class="c-sep">:</span><span class="c-path">~</span><span class="cursor-block">█</span>
+    </div>
+    <ul class="nav-links" role="list">
+      <li><a href="/home"     class="nav-link" data-section="home"     onclick="event.preventDefault();App.navigate('home')">./home</a></li>
+      <li><a href="/projetos" class="nav-link" data-section="projetos" onclick="event.preventDefault();App.navigate('projetos')">./projetos</a></li>
+      <li><a href="/blog"     class="nav-link" data-section="blog"     onclick="event.preventDefault();App.navigate('blog')">./blog</a></li>
+      <li><a href="/social"   class="nav-link" data-section="social"   onclick="event.preventDefault();App.navigate('social')">./social</a></li>
+    </ul>
+  </nav>
+  <main id="app" role="main"></main>
+  <footer class="site-footer">
+    <span class="c-dim">[ s.o: </span>
+    <span class="c-accent">portfólio</span>
+    <span class="c-dim"> | uptime: </span>
+    <span id="uptime" class="c-green">00:00:00</span>
+    <span class="c-dim"> ]</span>
+  </footer>
+  <script src="/projetos/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typeit@8.8.5/dist/index.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

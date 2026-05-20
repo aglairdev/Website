@@ -1,0 +1,12 @@
+{
+  "posts": [
+    {
+      "slug": "grand-line",
+      "title": "Grand line",
+      "date": "19-05-2025",
+      "excerpt": "Indexação de alternativas gratuitas.",
+      "tags": ["acervo"],
+      "file": "grand-line.md"
+    }
+  ]
+}
