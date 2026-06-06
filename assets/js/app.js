@@ -255,9 +255,9 @@ const App = (() => {
       },
       {
         label: 'Youtube',
-        handle: '@shebbang',
+        handle: '@aglairdev',
         desc: 'Não faço ideia.',
-        url: 'https://www.youtube.com/@shebbang',
+        url: 'https://www.youtube.com/@aglairdev',
         icon: '▶'
       }
     ];
