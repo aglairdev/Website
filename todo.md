@@ -2,7 +2,7 @@
 
 ### grand-line
 
-- [ ] adicionar link de [Addons](https://stremio-addons.net/) ao Stremio
+- [x] adicionar link de [Addons](https://stremio-addons.net/) ao Stremio
 
 ## favicons
 
