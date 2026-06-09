@@ -165,7 +165,7 @@ const App = (() => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         _manifest = await res.json();
       }
-      const posts = _manifest.posts || [];
+      const posts = (_manifest.posts || []).sort((a, b) => new Date(b.date) - new Date(a.date));
       const allTags = [...new Set(posts.flatMap(p => p.tags || []))].sort();
       setContent(`
         <section class="section" id="blog-section">
