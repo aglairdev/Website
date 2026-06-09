@@ -7,6 +7,14 @@
       "excerpt": "Indexação de alternativas gratuitas.",
       "tags": ["acervo"],
       "file": "grand-line.md"
+    },
+    {
+      "slug": "noctalia-mpv",
+      "title": "Noctalia MPV",
+      "date": "08-06-2026",
+      "excerpt": "Plugin Noctalia para mpv via IPC socket.",
+      "tags": ["linux"],
+      "file": "noctalia-mpv.md" 
     }
   ]
 }
