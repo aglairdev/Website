@@ -15,6 +15,14 @@
       "excerpt": "Plugin Noctalia para mpv via IPC socket.",
       "tags": ["linux"],
       "file": "noctalia-mpv.md" 
+    },
+        {
+      "slug": "opencode-config",
+      "title": "Opencode config",
+      "date": "10-06-2026",
+      "excerpt": "Boas práticas com Opencode.",
+      "tags": ["linux"],
+      "file": "opencode-config.md" 
     }
   ]
 }
