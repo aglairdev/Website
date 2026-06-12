@@ -1,7 +1,7 @@
 window.PROJECTS = [
 {
     title: '~/goflix',
-    description: 'Acervo de vídeos no terminal..',
+    description: 'Acervo de vídeos no terminal.',
     tags: ['Go', 'TUI', 'Linux', 'MPV'],
     github: 'https://github.com/aglairdev/goflix',
   },  
@@ -10,6 +10,7 @@ window.PROJECTS = [
     description: 'Kanban e diário.',
     tags: ['JavaScript', 'Web Crypto API', 'CSP'],
     github: 'https://github.com/aglairdev/brasa',
+    site: 'https://aglairdev.github.io/brasa/'
   },
 {
     title: '~/manifest',

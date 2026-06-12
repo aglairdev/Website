@@ -138,7 +138,7 @@ const App = (() => {
             </div>
             <div class="project-links" style="display: flex; gap: 12px; margin: 0;">
               ${p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener" class="btn btn-sm" style="margin: 0; padding: 2px 8px;">[ github ]</a>` : ''}
-              ${p.live   ? `<a href="${esc(p.live)}"   target="_blank" rel="noopener" class="btn btn-sm btn-cyan" style="margin: 0; padding: 2px 8px;">[ live ]</a>` : ''}
+              ${p.site   ? `<a href="${esc(p.site)}"   target="_blank" rel="noopener" class="btn btn-sm btn-cyan" style="margin: 0; padding: 2px 8px;">[ site ]</a>` : ''}
             </div>
           </div>
         </div>`).join('')
