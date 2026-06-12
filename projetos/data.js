@@ -1,5 +1,11 @@
 window.PROJECTS = [
 {
+    title: '~/goflix',
+    description: 'Acervo de vídeos no terminal..',
+    tags: ['Go', 'TUI', 'Linux', 'MPV'],
+    github: 'https://github.com/aglairdev/goflix',
+  },  
+{
     title: '~/brasa',
     description: 'Kanban e diário.',
     tags: ['JavaScript', 'Web Crypto API', 'CSP'],
