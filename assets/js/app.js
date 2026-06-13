@@ -6,6 +6,36 @@ const App = (() => {
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   const esc = (s) => String(s).replace(/[&<>"']/g, c =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  function pruneEmpty(obj) {
+    return Object.entries(obj || {}).filter(([, v]) => v !== "" && v != null);
+  }
+
+  function tiLine(label, value) {
+    if (!value) return '';
+    return `<span class="ti-hl">${esc(label)} ›</span> ${value}`;
+  }
+
+  function sistemaLine(distro) {
+    const parts = pruneEmpty(distro).map(([, v]) => esc(v));
+    if (!parts.length) return '';
+    return tiLine('Sistema', parts.join(' · '));
+  }
+
+  function hardwareLine(hardware) {
+    const parts = pruneEmpty(hardware).map(([, v]) => esc(v));
+    if (!parts.length) return '';
+    return tiLine('Hardware', parts.join(' · '));
+  }
+
+  function ouvindoLine(music) {
+    if (!music || !music.artist || !music.track) return '';
+    const value = music.url
+      ? `<a href="${esc(music.url)}" target="_blank" rel="noopener"><span class="np-icon">♬</span> ${esc(music.track)} <span class="np-dot">●</span> ${esc(music.artist)}</a>`
+      : `<span class="np-icon">♬</span> ${esc(music.track)} <span class="np-dot">●</span> ${esc(music.artist)}`;
+    return tiLine('Ouvindo', value);
+  }
+
   function setContent(html) {
     $('#app').innerHTML = html;
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -68,6 +98,8 @@ const App = (() => {
   }
   //home
   async function renderHome() {
+    const INFO = window.INFO || {};
+
     setContent(`
       <section class="section" id="home-section">
         <div class="card" style="animation-delay:.0s">
@@ -75,7 +107,7 @@ const App = (() => {
           <div class="card-body">
             <div class="prompt-line">
               <span class="ps">visitor@portfolio:~$</span>
-              <span class="cmd">cat about.txt</span>
+              <span class="cmd">cat sobre.txt</span>
             </div>
             <div id="typeit-target"></div>
           </div>
@@ -88,11 +120,7 @@ const App = (() => {
               <span class="cmd">ls skills/ --color</span>
             </div>
             <div class="skills-grid" id="skills-grid">
-              ${[
-        'JavaScript', 'Node.js', 'Linux', 'Bash',
-        'Docker', 'Git', 'Python',
-        'SQL'
-      ].map((s, i) => `<span class="skill-tag" style="animation-delay:${.05 * i}s">&lt;${esc(s)}/&gt;</span>`).join('')}
+              ${(INFO.skills || []).map((s, i) => `<span class="skill-tag" style="animation-delay:${.05 * i}s">&lt;${esc(s)}/&gt;</span>`).join('')}
             </div>
           </div>
         </div>
@@ -104,15 +132,24 @@ const App = (() => {
       </section>`);
     //typeit
     if (typeof TypeIt !== 'undefined') {
-      new TypeIt('#typeit-target', {
+      const ti = new TypeIt('#typeit-target', {
         speed: 38,
         deleteSpeed: 20,
         waitUntilVisible: true,
-      })
-        .type('Olá! Sou <strong>Aglair</strong>.', { delay: 400 })
-        .break()
-        .type('<span class="ti-hl">Status ›</span> disponível para projetos e colaborações.')
-        .go();
+      });
+      const about = (INFO.about && INFO.about.length)
+        ? [...INFO.about]
+        : ['Olá! Sou <strong>Aglair</strong>.', '<span class="ti-hl">Status ›</span> disponível para projetos e colaborações.'];
+
+      [sistemaLine(INFO.distro), hardwareLine(INFO.hardware), ouvindoLine(INFO.music)]
+        .filter(Boolean)
+        .forEach(line => about.push(line));
+
+      about.forEach((line, i) => {
+        ti.type(line, i === 0 ? { delay: 400 } : undefined);
+        if (i < about.length - 1) ti.break();
+      });
+      ti.go();
     }
   }
 //projetos
@@ -238,29 +275,7 @@ const App = (() => {
   }
   //social
   async function renderSocial() {
-    const links = [
-      {
-        label: 'GitHub',
-        handle: '@aglairdev',
-        desc: 'Versionamento de projetos e contribuições.',
-        url: 'https://github.com/aglairdev',
-        icon: '⌥'
-      },
-      {
-        label: 'Email',
-        handle: 'aglaircontato@proton.me',
-        desc: 'Projetos e colaborações.',
-        url: 'mailto:aglaircontato@proton.me',
-        icon: '✉'
-      },
-      {
-        label: 'Youtube',
-        handle: '@aglairdev',
-        desc: 'Não faço ideia.',
-        url: 'https://www.youtube.com/@aglairdev',
-        icon: '▶'
-      }
-    ];
+    const links = (window.INFO && window.INFO.social) || [];
     setContent(`
       <section class="section" id="social-section">
         <div class="section-header">
@@ -315,8 +330,16 @@ const App = (() => {
       if ($('#uptime')) $('#uptime').textContent = `${h}:${m}:${sc}`;
     }, 1000);
   }
+  function applyHost() {
+    const host = (window.INFO && window.INFO.host) || 'portfolio';
+    const hostEl = $('.c-host');
+    if (hostEl) hostEl.textContent = host;
+    const footerHost = $('.site-footer .c-accent');
+    if (footerHost) footerHost.textContent = host;
+  }
   function init() {
     console.log('%c ꕤ AGL ', 'color: #00ff00; font-size: 1.2rem;');
+    applyHost();
     window.addEventListener('popstate', route);
     route();
     startUptime();
