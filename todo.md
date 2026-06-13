@@ -8,16 +8,12 @@
 
 - [ ] opção que funcione bem em contraste claro e escuro
 
-## infos
-
-### ~/whoami
-- [ ] adicionar seção de distro e hardware atual
-
-### info.js
-- [ ] criar `assets/js/info.js` com os dados isolados
+### data.js
+- [x] criar `assets/js/data.js` com os dados isolados
+  - `info`
+  - `about`
+  - `skills`
   - `distro`
   - `hardware`
-  - `skills`
-  - `name`
-  - `status`
+  - `music`
   - `social`

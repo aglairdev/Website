@@ -509,6 +509,12 @@ body::after {
   gap: 2px;
   backdrop-filter: blur(4px);
 }
+
+.footer-year {
+  margin-left: auto;
+  color: var(--fg-dim);
+}
+
 .loading-block {
   padding: 48px 0;
   text-align: center;
@@ -549,6 +555,23 @@ body::after {
 }
 .alert-error { border-color: var(--accent3); color: var(--accent3); }
 .alert-info  { border-color: var(--fg-dim); color: var(--fg-mid); }
+
+/* música icon */
+.np-icon {
+  color: var(--accent);
+  display: inline-block;
+  animation: pulse-note 2s ease-in-out infinite;
+}
+.np-dot {
+  color: var(--fg-dim);
+  font-size: .6em;
+  vertical-align: middle;
+}
+@keyframes pulse-note {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .4; }
+}
+
 @media (max-width: 768px) {
   .site-nav {
     flex-direction: column;
