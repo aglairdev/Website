@@ -14,8 +14,8 @@ window.INFO = {
   ],
 
   distro: {
-    name: "CachyOS",
-    wm: "Niri",
+    name: "Arch Linux",
+    wm: "i3wm",
     shell: "Zsh"
   },
 
@@ -28,7 +28,7 @@ window.INFO = {
   music: {
     artist: "Fabio Brazza",
     track: "Prazeres Artificiais",
-    url: "https://youtu.be/I7uJLIRrPN4?si=DFVscOtQxnSm9Oyh"
+    url: ""
   },
 
   social: [
