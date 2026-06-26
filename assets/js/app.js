@@ -125,9 +125,9 @@ const App = (() => {
           </div>
         </div>
         <div class="home-cta" style="animation:fade-up .4s .2s both">
-          <button class="btn btn-amber" onclick="App.navigate('projetos')">❯ ls ./projetos</button>
-          <button class="btn btn-cyan"  onclick="App.navigate('blog')">❯ cat ./blog</button>
-          <button class="btn"           onclick="App.navigate('social')">❯ ./social --contact</button>
+          <button class="btn btn-amber" data-nav="projetos">❯ ls ./projetos</button>
+          <button class="btn btn-cyan"  data-nav="blog">❯ cat ./blog</button>
+          <button class="btn"           data-nav="social">❯ ./social --contact</button>
         </div>
       </section>`);
     //typeit
@@ -151,14 +151,17 @@ const App = (() => {
       });
       ti.go();
     }
+    $$('[data-nav]').forEach(btn => {
+      btn.addEventListener('click', () => App.navigate(btn.dataset.nav));
+    });
   }
-//projetos
+  //projetos
   async function renderProjects() {
     const projects = window.PROJECTS || [];
     const spacing = "1.2rem";
     const cards = projects.length
       ? projects.map((p, i) => `
-        <div class="card project-card stagger" style="animation:fade-up .4s ${.07*i}s both; display: flex; flex-direction: column; height: 100%;">
+        <div class="card project-card stagger" style="animation:fade-up .4s ${.07 * i}s both; display: flex; flex-direction: column; height: 100%;">
           <div class="card-header"><span class="sym">❯</span> ${esc(p.title)}</div>
           <div class="card-body" style="
             padding: ${spacing};
@@ -175,7 +178,7 @@ const App = (() => {
             </div>
             <div class="project-links" style="display: flex; gap: 12px; margin: 0;">
               ${p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener" class="btn btn-sm" style="margin: 0; padding: 2px 8px;">[ github ]</a>` : ''}
-              ${p.site   ? `<a href="${esc(p.site)}"   target="_blank" rel="noopener" class="btn btn-sm btn-cyan" style="margin: 0; padding: 2px 8px;">[ site ]</a>` : ''}
+              ${p.site ? `<a href="${esc(p.site)}"   target="_blank" rel="noopener" class="btn btn-sm btn-cyan" style="margin: 0; padding: 2px 8px;">[ site ]</a>` : ''}
             </div>
           </div>
         </div>`).join('')
@@ -212,8 +215,8 @@ const App = (() => {
           ${allTags.length ? `
           <div class="tag-filter">
             <span class="label">filtro:</span>
-            <button class="tag active" onclick="App.filterPosts(null, this)">tudo</button>
-            ${allTags.map(t => `<button class="tag" onclick="App.filterPosts('${esc(t)}', this)">${esc(t)}</button>`).join('')}
+            <button class="tag active" data-filter="">tudo</button>
+            ${allTags.map(t => `<button class="tag" data-filter="${esc(t)}">${esc(t)}</button>`).join('')}
           </div>` : ''}
           <div class="posts-list stagger" id="posts-list">
             ${posts.length
@@ -223,12 +226,21 @@ const App = (() => {
                   <a href="/blog/${esc(p.slug)}" class="post-title">${esc(p.title)}</a>
                   ${p.excerpt ? `<p class="post-excerpt">${esc(p.excerpt)}</p>` : ''}
                   <div class="post-tags">
-                    ${(p.tags || []).map(t => `<span class="tag" onclick="App.filterByTag('${esc(t)}')">${esc(t)}</span>`).join('')}
+                    ${(p.tags || []).map(t => `<span class="tag" data-filtertag="${esc(t)}">${esc(t)}</span>`).join('')}
                   </div>
                 </div>`).join('')
           : `<p class="alert alert-info">Nenhum post encontrado.</p>`}
           </div>
         </section>`);
+      $$('.tag-filter .tag').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tag = btn.dataset.filter || null;
+          filterPosts(tag, btn);
+        });
+      });
+      $$('[data-filtertag]').forEach(tag => {
+        tag.addEventListener('click', () => filterByTag(tag.dataset.filtertag));
+      });
     } catch (err) {
       setContent(`<div class="alert alert-error">Não foi possível carregar o blog. Tente novamente mais tarde.</div>`);
     }
@@ -252,7 +264,7 @@ const App = (() => {
       setContent(`
         <article class="section" id="post-section">
           <div class="post-nav">
-            <button class="btn btn-sm" onclick="history.back()">← voltar</button>
+            <button class="btn btn-sm" id="btn-voltar">← voltar</button>
             <a href="/blog" class="btn btn-sm">ls ./blog</a>
           </div>
           <div class="post-meta">
@@ -263,9 +275,11 @@ const App = (() => {
           </div>
           <div class="post-content">${html}</div>
           <div class="post-footer">
-            <button class="btn btn-sm btn-amber" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ voltar ao topo</button>
+            <button class="btn btn-sm btn-amber" id="btn-topo">↑ voltar ao topo</button>
           </div>
         </article>`);
+      $('#btn-voltar').addEventListener('click', () => history.back());
+      $('#btn-topo').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
       $$('#post-section pre code').forEach(el => {
         if (!el.classList.contains('hljs')) hljs.highlightElement(el);
       });
@@ -340,6 +354,12 @@ const App = (() => {
   function init() {
     console.log('%c ꕤ AGL ', 'color: #00ff00; font-size: 1.2rem;');
     applyHost();
+    $$('.nav-link').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        App.navigate(a.dataset.section);
+      });
+    });
     window.addEventListener('popstate', route);
     route();
     startUptime();
