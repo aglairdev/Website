@@ -7,14 +7,6 @@
       "excerpt": "Indexação de alternativas gratuitas.",
       "tags": ["acervo"],
       "file": "grand-line.md"
-    },
-        {
-      "slug": "opencode-config",
-      "title": "Opencode config",
-      "date": "11-06-2026",
-      "excerpt": "Boas práticas com Opencode.",
-      "tags": ["linux"],
-      "file": "opencode-config.md" 
     }
   ]
 }
